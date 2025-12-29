@@ -22,6 +22,8 @@ uint16_t randomInt(uint16_t min, uint16_t max)
 void send_next_chunk(evutil_socket_t fd, short events, void* args)
 {
     struct evhttp_request* req = (struct evhttp_request*)args;
+    if(req->evcon == nullptr)
+        return;
 
     char buf[256];
     short meowCount = randomInt(1, 15);
